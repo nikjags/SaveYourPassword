@@ -61,7 +61,7 @@ public class EncryptedFileWriter{
     private void write(String str) throws IOException{
         String key_str = "";
         for (int i = 0; i < str.getBytes().length ; i++){
-            key_str += (char)rand.nextInt(1024);
+            key_str += (char) rand.nextInt(1024);
         }
         passFile.write(EncryptVernam.encrypt(str, key_str));
         keyFile.write(key_str);

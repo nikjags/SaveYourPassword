@@ -14,7 +14,6 @@ import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.FileList;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
@@ -102,7 +101,7 @@ public class DriveAccess{
      *
      * @return {@code String}, if file of specified name is found;
      *         {@code null} otherwise.
-     * @throws IOException
+     * @throws IOException if upload was unsuccessful.
      */
     private String findFile(String fileName) throws IOException{
         FileList result = service.files().list()
@@ -119,16 +118,16 @@ public class DriveAccess{
      * Downloads a password file from GDrive repository to {@code file_path}.
      *
      * @param file_path
-     *        {@code Path} representing a path in the file system, where the file will be downloaded.
+     *        {@code String} representing a path in the file system, where the file will be downloaded.
      *
      * @throws IOException if the password file in GDrive isn't exist.
      */
-    public void downloadFile(Path file_path) throws IOException {
+    public void downloadFile(String file_path) throws IOException {
 
         if (findFile(PASS_FILE_NAME) == null)
             throw new FileNotFoundException();
         else {
-            OutputStream outputStream = new FileOutputStream(file_path.toString());
+            OutputStream outputStream = new FileOutputStream(file_path);
             service.files().get(findFile(PASS_FILE_NAME))
                     .executeMediaAndDownloadTo(outputStream);
         }
@@ -140,13 +139,14 @@ public class DriveAccess{
      * <p>If a folder already contains a password file, deletes a file and uploads a new one.
      *
      * @param path_to_file
-     *        {@code Path} representing a path, where file to be uploaded is stored.
+     *        {@code String} representing a path, where file to be uploaded is stored.
      *
      * @throws IOException if the password file in GDrive isn't exist.
      */
-    public void uploadFile(Path path_to_file) throws IOException {
+    public void uploadFile(String path_to_file) throws IOException {
+        com.google.api.services.drive.model.File folder;
         String folder_id = findFile(PASS_FOLDER_NAME);
-        com.google.api.services.drive.model.File folder = null;
+
         if (folder_id == null) { // if folder not found
             folder = new com.google.api.services.drive.model.File();
             folder.setName(PASS_FOLDER_NAME);
@@ -163,7 +163,7 @@ public class DriveAccess{
         com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File();
         fileMetadata.setName(PASS_FILE_NAME);
         fileMetadata.setParents(Collections.singletonList(folder_id));
-        java.io.File filePath = new java.io.File(path_to_file.toString());
+        java.io.File filePath = new java.io.File(path_to_file);
         FileContent mediaContent = new FileContent("", filePath);
         service.files().create(fileMetadata, mediaContent)
                 .setFields("id, parents")

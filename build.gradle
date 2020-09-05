@@ -7,13 +7,36 @@ buildscript {
     }
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:6.0.0"
+    }
+}
+
+
 repositories {
     jcenter()
 }
 
+apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'edu.sc.seis.launch4j'
+apply plugin: 'gradle-one-jar'
 
 mainClassName = 'Main'
 sourceCompatibility = 1.8
@@ -35,3 +58,13 @@ launch4j {
     icon = "${projectDir}/src/main/resources/images/logo.png"
 }
 
+task OneJar(type: OneJar) {
+    mainClass = mainClassName
+    archiveName = 'Save Your Password.jar'
+}
+
+task testJar(type: Jar) {
+    manifest {
+        attributes 'Description': 'This is an application JAR'
+    }
+}

@@ -1,10 +1,10 @@
+
 /**
  * {@code EncryptVernam} class provides a method for encrypting and decrypting {@code String} values by Vernam Cipher.
  *
  * @author nikjag
  * @version 1.0
  */
-
 public class EncryptVernam {
 
     /**

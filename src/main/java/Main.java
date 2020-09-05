@@ -1,6 +1,5 @@
+
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -36,16 +35,16 @@ public class Main {
     private static boolean isFileSystem = false;
 
     /**
-     * {@link Path} object represents a path to the password file.
+     * {@link String} object represents a path to the password file.
      * <p>Initialized by a default file name.
      */
-    private static Path PASS_FILE = Paths.get("password.txt");
+    private static String PASS_FILE = "password.txt";
 
     /**
-     * {@link Path} object represents a path to the key file.
+     * {@link String} object represents a path to the key file.
      * <p>Initialized by a default file name.
      */
-    private static Path KEY_FILE = Paths.get("key.txt");
+    private static String KEY_FILE = "key.txt";
 
     /**
      * {@link DriveAccess} object provides all methods needed to manage GDrive repository
@@ -129,7 +128,7 @@ public class Main {
                     "\n");
             return false;
         }
-        System.out.println(PASS_FILE.toAbsolutePath().toString());
+        System.out.println(PASS_FILE);
         System.out.println("File has been found!");
         return true;
     }
@@ -221,7 +220,7 @@ public class Main {
 
             }
 
-            System.out.println(KEY_FILE.toAbsolutePath().toString());
+            System.out.println(KEY_FILE);
             key_file_selected = true;
             System.out.println("Key file has been found!");
         }
@@ -356,7 +355,7 @@ public class Main {
      * @throws IOException if input was unsuccessful.
      */
     private static void saveChanges() throws IOException {
-        EncryptedFileWriter fileWriter = new EncryptedFileWriter(PASS_FILE.toString(),KEY_FILE.toString());
+        EncryptedFileWriter fileWriter = new EncryptedFileWriter(PASS_FILE,KEY_FILE);
         fileWriter.write(recordList);
         if (isDrive | fileIsCreated){
             if (fileIsCreated) {
@@ -384,7 +383,7 @@ public class Main {
                 System.out.println("Try to repeat establishing or choose another option." +
                         "\n");
             }
-            File deletingFile = new File(PASS_FILE.toString());
+            File deletingFile = new File(PASS_FILE);
             deletingFile.delete();
         }
         if(isFileSystem){
@@ -447,7 +446,7 @@ public class Main {
             recordList = new ArrayList<>();
         }
         else {
-            EncryptedFileReader fileReader = new EncryptedFileReader(PASS_FILE.toString(),KEY_FILE.toString());
+            EncryptedFileReader fileReader = new EncryptedFileReader(PASS_FILE,KEY_FILE);
             recordList = fileReader.readList();
         }
 
@@ -512,8 +511,10 @@ public class Main {
                     }
                     exitProgram();
                 }
-                default:
+                default: {
                     repeatInput();
+                    break;
+                }
             }
         }
     }

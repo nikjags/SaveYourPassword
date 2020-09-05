@@ -17,14 +17,14 @@ public class ExplorerFileManaging {
      * @return {@link Path} object which represent a path to the file.
      * @throws FileNotFoundException if file not found.
      */
-    public static Path getFile(String file_title) throws FileNotFoundException {
+    public static String getFile(String file_title) throws FileNotFoundException {
         FileDialog dialog = new FileDialog((Frame)null, "Select " + file_title + " to Open");
         dialog.setMode(FileDialog.LOAD);
         dialog.setVisible(true);
         String file = dialog.getFile();
         dialog.dispose();
         if (file != null)
-            return Path.of(file);
+            return file;
         else
             throw new FileNotFoundException();
     }
@@ -37,14 +37,14 @@ public class ExplorerFileManaging {
      * @return {@link Path} object which represent a path to the file.
      * @throws FileNotFoundException if file not found.
      */
-    public static Path createFile(String file_title) throws FileNotFoundException {
+    public static String createFile(String file_title) throws FileNotFoundException {
         FileDialog dialog = new FileDialog((Frame)null, "Save a " + file_title);
         dialog.setMode(FileDialog.SAVE);
         dialog.setVisible(true);
         String file = dialog.getFile();
         dialog.dispose();
         if (file != null)
-            return Path.of(file);
+            return file;
         else
             throw new FileNotFoundException();
     }

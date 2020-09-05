@@ -62,7 +62,7 @@ public class EncryptedFileReader{
                 return null;
             else if ((char)read_ch == ':')
                 break;
-            str_length_of_string += (char)read_ch;
+            str_length_of_string += (char) read_ch;
         } while (true);
 
         int len_of_string = Integer.parseInt(str_length_of_string);
