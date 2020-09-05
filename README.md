@@ -6,8 +6,8 @@ To store your login-password pairs from everything requiring authentication.
 
 # TL;DR How to get it?
 All you need is:
-- Java virtual machine ([download](https://www.google.com));
-- [The application itself](https://drive.google.com/file/d/1ipiAeO5dnBuWN0cZ6QFri690GKKuR7TQ/view?usp=sharing);
+- Java virtual machine version 11 or above (you can get it from JDK);
+- [The application itself](https://drive.google.com/file/d/1eAs8HE3ZUy4pdN9aDPXqXIoQkD5P-s0h/view?usp=sharing);
 - Google account.
 
 Extract all files into your favorite folder.
@@ -27,7 +27,7 @@ Tag field is used to represent an affiliation with something requiring login-pas
 You can write there everything you want; but remember: this field is used for login-pass pairs search, so write something what makes sense to future version of yours.
 
 ## Save your changes
-First save is managing a connection with GDrive, creates folder and uploads a password file to store it; it's also creates a key file.
+First save is managing a connection with GDrive, creates folder and uploads a password file to store it; it's also creates a key file in application folder.
 
 ### What should i do with key file?
 
