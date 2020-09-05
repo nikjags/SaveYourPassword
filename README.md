@@ -7,7 +7,8 @@ To store your login-password pairs from everything requiring authentication.
 # TL;DR How to get it?
 All you need is:
 - Java virtual machine ([download](https://www.google.com));
-- [The application itself](https://drive.google.com/file/d/1ipiAeO5dnBuWN0cZ6QFri690GKKuR7TQ/view?usp=sharing).
+- [The application itself](https://drive.google.com/file/d/1ipiAeO5dnBuWN0cZ6QFri690GKKuR7TQ/view?usp=sharing)
+- Google account.
 
 Extract all files into your favorite folder.
 
